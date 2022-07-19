@@ -1,31 +1,46 @@
-process.stdout.write("Hello  \n \n");
+// Setting the time [3000 = 3 seconds]
+const waitTime = 3000;
 
-const questions = [
-  "What is your name?",
-  "What would you rather be doing?",
-  "What is your preferred programming language"
-];
-const answers = [];
+// Console text saying that you are seeting a {time} delay
+console.log(`setting a ${waitTime / 1000} second delay`);
 
-function ask(i = 0) {
-  process.stdout.write(`\n\n\n ${questions[i]}`);
-  process.stdout.write(` > `);
-}
+// Print done when you are done based on the interval
+// Example: 3 seconds at a 0.5 interval, basically 6x
+const timerFinished = () => {
+  clearInterval(interval);
+  console.log("done");
+};
 
-ask();
+// This stops the program when it reaches the waitTime
+setTimeout(timerFinished, waitTime);
 
-process.stdin.on("data", function (data) {
-  answers.push(data.toString().trim());
-  if (answers.length < questions.length) {
-    ask(answers.length);
-  } else {
-    process.exit();
-  }
-});
+// Specifying the interval
+const waitInterval = 500;
+let currentTime = 0;
 
-process.on("exit", function () {
-  process.stdout.write("\n\n\n\n");
-  process.stdout.write(
-    `Go ${answers[1]} ${answers[0]} you can finish writing ${answers[2]} later`
-  );
-});
+// Setting the increment time, adding more and more till it is equal
+const incTime = () => {
+  currentTime += waitInterval;
+  console.log(`waiting ${currentTime / 1000} seconds`);
+};
+
+// Setting interval
+const interval = setInterval(incTime, waitInterval);
+
+// // "data" means that this function is only called when an data event is happening
+// process.stdin.on("data", function (data) {
+//   answers.push(data.toString().trim());
+//   if (answers.length < questions.length) {
+//     ask(answers.length);
+//   } else {
+//     process.exit();
+//   }
+// });
+
+// // "exit" means that this function is only called when an exit event is happening
+// process.on("exit", function () {
+//   process.stdout.write("\n\n\n\n");
+//   process.stdout.write(
+//     `Go ${answers[1]} ${answers[0]} you can finish writing ${answers[2]} later`
+//   );
+// });
