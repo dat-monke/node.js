@@ -5,6 +5,7 @@ const dec = () => --count;
 
 const getCount = () => count;
 
+// Everything within this, all these variables can be consumed
 module.exports = {
   anything: true,
   who: "Bill",
