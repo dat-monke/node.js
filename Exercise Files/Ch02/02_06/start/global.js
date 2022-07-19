@@ -21,7 +21,14 @@ let currentTime = 0;
 // Setting the increment time, adding more and more till it is equal
 const incTime = () => {
   currentTime += waitInterval;
-  console.log(`waiting ${currentTime / 1000} seconds`);
+  // This creates a percentage value for the asynchronous task
+  const p = Math.floor((currentTime / waitTime) * 100);
+  // Clearing the line
+  process.stdout.clearLine();
+  process.stdout.cursorTo(0);
+  // Writes the percentage task until it is done
+  process.stdout.write(`waiting.... ${p}`);
+  // console.log(`waiting ${currentTime / 1000} seconds`);
 };
 
 // Setting interval
